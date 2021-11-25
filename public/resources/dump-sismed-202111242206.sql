@@ -248,8 +248,10 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`urem`@`%`*/ /*!50003 TRIGGER bef_eliminar_nota_ingreso BEFORE delete
-    ON nota_ingreso FOR EACH ROW
+/*!50003 CREATE*/ /*!50017 DEFINER=`remoto`@`%`*/ /*!50003 TRIGGER bef_eliminar_nota_ingreso BEFORE delete
+
+    ON nota_ingreso FOR EACH ROW
+
 	delete from producto_nota_ingreso where `N°Nota`=old.`N°Nota` */;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -584,8 +586,10 @@ UNLOCK TABLES;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `eliminar_nota_ingreso`(in N°Nota varchar(10))
-BEGIN
-	delete from nota_ingreso where N°Nota=N°Nota;
+BEGIN
+
+	delete from nota_ingreso where N°Nota=N°Nota;
+
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -603,8 +607,10 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `eli_produ_nota_ingreso`(in nro varchar(10), in codprod varchar(12))
-BEGIN
- delete from producto_nota_ingreso where N°Nota=nro and Cod_Producto=codprod;
+BEGIN
+
+ delete from producto_nota_ingreso where N°Nota=nro and Cod_Producto=codprod;
+
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -621,15 +627,23 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`urem`@`%` PROCEDURE `getAllNota`()
-BEGIN
-	Select nip.N°Nota as nro,concat(Año,'-',Mes,'-',Dia)as fecha,
-		sum(nip.importe) as total,
-		Tip_Doc_Origen as tip,
-		Nro_Doc_Origen as nrDoc
-	From Nota_Ingreso 
-	INNER JOIN Producto_Nota_Ingreso nip ON Nota_Ingreso.N°Nota=nip.N°Nota
-	group By(nip.N°Nota);
+CREATE DEFINER=`remoto`@`%` PROCEDURE `getAllNota`()
+BEGIN
+
+	Select nip.N°Nota as nro,concat(Año,'-',Mes,'-',Dia)as fecha,
+
+		sum(nip.importe) as total,
+
+		Tip_Doc_Origen as tip,
+
+		Nro_Doc_Origen as nrDoc
+
+	From Nota_Ingreso 
+
+	INNER JOIN Producto_Nota_Ingreso nip ON Nota_Ingreso.N°Nota=nip.N°Nota
+
+	group By(nip.N°Nota);
+
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -646,12 +660,17 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`urem`@`%` PROCEDURE `getAllNotasProd`(IN id varchar(10))
-BEGIN
-    SELECT p.Nom_Producto as nom, pni.Cod_Producto as codprod, pni.Cant_Producto 
-	    as cantprod, p.Precio_Unitario as precio, p.Fecha_vencimiento as fechav, pni.Importe as importe FROM Producto_Nota_Ingreso pni LEFT JOIN Producto p
-	    ON p.Cod_Producto=pni.Cod_Producto 
-	    WHERE pni.N°Nota=id;
+CREATE DEFINER=`remoto`@`%` PROCEDURE `getAllNotasProd`(IN id varchar(10))
+BEGIN
+
+    SELECT p.Nom_Producto as nom, pni.Cod_Producto as codprod, pni.Cant_Producto 
+
+	    as cantprod, p.Precio_Unitario as precio, p.Fecha_vencimiento as fechav, pni.Importe as importe FROM Producto_Nota_Ingreso pni LEFT JOIN Producto p
+
+	    ON p.Cod_Producto=pni.Cod_Producto 
+
+	    WHERE pni.N°Nota=id;
+
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -668,9 +687,11 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`urem`@`%` PROCEDURE `getListPrecio`()
-BEGIN
-	SELECT Cod_producto as cod, (concat(Nom_Producto,' (',Precio_Unitario,' S/.)')) as pre FROM Producto;
+CREATE DEFINER=`remoto`@`%` PROCEDURE `getListPrecio`()
+BEGIN
+
+	SELECT Cod_producto as cod, (concat(Nom_Producto,' (',Precio_Unitario,' S/.)')) as pre FROM Producto;
+
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -687,9 +708,11 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`urem`@`%` PROCEDURE `getListProd`()
-BEGIN
-	SELECT Cod_producto as cod, (concat(Nom_Producto,' (',Precio_Unitario,' S/.)')) as pre FROM Producto;
+CREATE DEFINER=`remoto`@`%` PROCEDURE `getListProd`()
+BEGIN
+
+	SELECT Cod_producto as cod, (concat(Nom_Producto,' (',Precio_Unitario,' S/.)')) as pre FROM Producto;
+
 end ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -706,9 +729,11 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`urem`@`%` PROCEDURE `getNota`(IN id varchar(10))
-BEGIN
-	Select *,concat(Año,'-',Mes,'-',Dia) as fecha From Nota_Ingreso Where N°Nota=id;
+CREATE DEFINER=`remoto`@`%` PROCEDURE `getNota`(IN id varchar(10))
+BEGIN
+
+	Select *,concat(Año,'-',Mes,'-',Dia) as fecha From Nota_Ingreso Where N°Nota=id;
+
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -726,11 +751,16 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `GetProd`(in id varchar(3),in nro varchar(10))
-BEGIN
-	select pni.*,p.Precio_Unitario as precio
-	    from Producto p join producto_nota_ingreso pni 
-	    on p.Cod_Producto = pni.Cod_Producto
-	    where pni.Cod_Producto = id and pni.N°Nota = nro;
+BEGIN
+
+	select pni.*,p.Precio_Unitario as precio
+
+	    from Producto p join producto_nota_ingreso pni 
+
+	    on p.Cod_Producto = pni.Cod_Producto
+
+	    where pni.Cod_Producto = id and pni.N°Nota = nro;
+
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -747,9 +777,11 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`urem`@`%` PROCEDURE `getProdPrecio`(IN id varchar(3))
-BEGIN
-	SELECT p.Precio_Unitario as precio FROM Producto p WHERE p.Cod_Producto = id;
+CREATE DEFINER=`remoto`@`%` PROCEDURE `getProdPrecio`(IN id varchar(3))
+BEGIN
+
+	SELECT p.Precio_Unitario as precio FROM Producto p WHERE p.Cod_Producto = id;
+
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -767,9 +799,12 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `insertar_produ_nota_ingreso`(in N°Nota varchar(10), in Cod_Producto varchar(12), in Cant_Producto int, in Importe decimal(10,2))
-BEGIN
-INSERT INTO producto_nota_ingreso (N°Nota,Cod_Producto,Cant_Producto,Importe)
-VALUES (N°Nota,Cod_Producto,Cant_Producto,Importe);
+BEGIN
+
+INSERT INTO producto_nota_ingreso (N°Nota,Cod_Producto,Cant_Producto,Importe)
+
+VALUES (N°Nota,Cod_Producto,Cant_Producto,Importe);
+
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -787,8 +822,10 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ins_nota_ingreso`(in N°Nota varchar(10),in Tip_Doc_Origen varchar(30),in Proveedor varchar(15),in Nro_Doc_Origen varchar(9),in Mes int,in Año int ,in Dia int,in Hora time)
-BEGIN
-	insert into nota_ingreso values(N°Nota,Tip_Doc_Origen,Proveedor,Nro_Doc_Origen,Mes,Año,Dia,Hora);
+BEGIN
+
+	insert into nota_ingreso values(N°Nota,Tip_Doc_Origen,Proveedor,Nro_Doc_Origen,Mes,Año,Dia,Hora);
+
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -806,8 +843,10 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ListaNotaIngreso`()
-BEGIN
-SELECT * FROM nota_ingreso order by mes+dia DESC;
+BEGIN
+
+SELECT * FROM nota_ingreso order by mes+dia DESC;
+
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -825,8 +864,10 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ListaProducto`()
-BEGIN
-SELECT * FROM producto order by Cod_Producto asc;
+BEGIN
+
+SELECT * FROM producto order by Cod_Producto asc;
+
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -844,8 +885,10 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ListaProveedor`()
-BEGIN
-	SELECT RUC_Prove,Nom_Prove FROM proveedor;
+BEGIN
+
+	SELECT RUC_Prove,Nom_Prove FROM proveedor;
+
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -863,8 +906,10 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ListProve`()
-BEGIN
-	select RUC_Prove, concat(RUC_Prove,' - ',Nom_Prove) as 'Nombre proveedor' from proveedor;
+BEGIN
+
+	select RUC_Prove, concat(RUC_Prove,' - ',Nom_Prove) as 'Nombre proveedor' from proveedor;
+
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -882,17 +927,28 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `mod_nota_ingreso`(in N°Nota varchar(10),in Tip_Doc_Origen varchar(30),in Proveedor varchar(15),in Nro_Doc_Origen varchar(9),in Mes int,in Año int ,in Dia int,in Hora time)
-BEGIN
-	update nota_ingreso
-    set 
-    Tip_Doc_Origen= Tip_Doc_Origen,
-	Proveedor=Proveedor,
-    Nro_Doc_Origen=Nro_Doc_Origen,
-    Mes=Mes,
-    Año=Año,
-    Dia=Dia,
-    Hora=Hora
-    where N°Nota=N°Nota;
+BEGIN
+
+	update nota_ingreso
+
+    set 
+
+    Tip_Doc_Origen= Tip_Doc_Origen,
+
+	Proveedor=Proveedor,
+
+    Nro_Doc_Origen=Nro_Doc_Origen,
+
+    Mes=Mes,
+
+    Año=Año,
+
+    Dia=Dia,
+
+    Hora=Hora
+
+    where N°Nota=N°Nota;
+
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -910,14 +966,22 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `mod_prod_nota_ingreso`(in N°Nota varchar(10), in Cod_Producto varchar(12), in Cant_Producto int, in Importe decimal(10,2))
-BEGIN
-update producto_nota_ingreso pni
-    set 
-    pni.N°Nota=N°Nota,
-    pni.Cod_Producto=Cod_Producto,
-    pni.Cant_Producto=Cant_Producto,
-    pni.Importe=Importe
-    where pni.N°Nota=N°Nota and pni.Cod_Producto=Cod_Producto;
+BEGIN
+
+update producto_nota_ingreso pni
+
+    set 
+
+    pni.N°Nota=N°Nota,
+
+    pni.Cod_Producto=Cod_Producto,
+
+    pni.Cant_Producto=Cant_Producto,
+
+    pni.Importe=Importe
+
+    where pni.N°Nota=N°Nota and pni.Cod_Producto=Cod_Producto;
+
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -935,9 +999,12 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `pro_insertar_nota_ingreso`(in N°Nota varchar(10),in Tip_Doc_Origen varchar(30),in Proveedor varchar(15),in Nro_Doc_Origen varchar(9),in Mes int,in Año int ,in Dia int,in Hora time)
-BEGIN
-INSERT INTO nota_ingreso (N°Nota, Tip_Doc_Origen,Proveedor,Nro_Doc_Origen ,Mes ,Año ,Dia,Hora)
-VALUES (N°Nota, Tip_Doc_Origen,Proveedor, Nro_Doc_Origen, Mes,Año ,Dia,Hora);
+BEGIN
+
+INSERT INTO nota_ingreso (N°Nota, Tip_Doc_Origen,Proveedor,Nro_Doc_Origen ,Mes ,Año ,Dia,Hora)
+
+VALUES (N°Nota, Tip_Doc_Origen,Proveedor, Nro_Doc_Origen, Mes,Año ,Dia,Hora);
+
 end ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
