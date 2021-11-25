@@ -1,0 +1,76 @@
+DOCS:
+#Requisitos:
+    - Login funcional
+    - Perfil de usuario (Cambio de contraseña y datos)
+    - CRUD de productos
+
+ENTORNO:
+    1. Git: https://gitforwindows.org/
+        - Crear Cuenta en Github, guardar Correo y Contraseña
+        - Descargar e instalar el programa
+        - Registrarse en Github
+        - Abrir Git Bash y ejecutar
+            git config --global user.email "you@example.com"
+            git config --global user.name "Your Name"
+        - Si funciona git --help, Listo
+
+    2. XAMPP: https://www.apachefriends.org/es/index.html
+        - Click en descargar, Instalar (5-10 minutos)
+        - Iniciar panel
+        - Iniciar Apache y Mysql, si no se inician correctamente Preguntar
+
+    3. Composer (Requiere XAMPP): https://getcomposer.org/download/
+        - Hay un link Composer-Setup.exe, descargar e instalar
+
+    4. Visual Studio Code: https://code.visualstudio.com/
+        - Descargar Instalador y Ejecutar
+        - Abrir programa para hacer comprobación
+        
+    5. Comprobación:
+        - Ctrl + j: muestra la terminal, ejecutar:
+            - git
+            - composer
+            - php -v
+            - localhost/phpmyadmin
+
+INICIALIZACIÓN:
+    6. PHP: Extensiones necesarias
+        extension=curl
+        extension=gd
+        extension=intl
+        extension=mbstring
+        extension=mysqli
+        extension=openssl
+        extension=pdo_mysql
+    7. Base de Datos:
+        - Crear una base de datos
+        - Crear un usuario con todos los privilegios
+        - Anotar las credenciales (usuario y contraseña) de la base de datos
+            - bd: sismed u: remoto c: Asdf1234
+    8. Clonar Proyecto: 
+        - En VSCode
+        - Ctrl+Shift+P
+        - Clonar
+        - Colocar url repositorio: https://github.com/PANCnnss/SDCursoCI4.git
+        - Elegir Ubicación
+        - Eliminar Carpeta Oculta .git
+    9. Code Igniter 4:
+        1- Ejecutar: composer update (No funcionará sin la extención intl de php)
+        2- Copiar el archivo env y cambiar por .env, colocar credenciales de la base de datos
+        3- Ejecutar migraciones: php spark migrate
+        4- Ejecutar Seeders: php spark db:seed LoginS
+        5- Ejecutar DBViews.sql (Vistas y otras cosas que no se pueden hacer en migraciones)
+
+Mejoras:
+    Principal>
+        - Implementar un CRUD de algun registro
+            - Listar
+            - Crear
+            #- Editar
+            #- Eliminar
+
+    Extras:
+        - Cambiar variables de usuario
+        - Completar formulario del usuario
+        - Colocar Tabla en español
+        # Mejoras extra

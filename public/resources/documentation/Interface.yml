@@ -1,0 +1,88 @@
+Interfaz Nota de Ingreso>
+    Listado:
+        - Nro Nota
+        - Fecha Registro
+        - Importe Total
+        - Tipo Documento
+        - Documento Origen
+    Cabecera: Vista, 
+        - Nro Nota
+        - Período (Disabled)
+        - Fecha Registro
+        - Hora Registro
+        - Proveedor (Lista Ruc-Nombre)
+        - Tipo Documento Origen ['ORDEN DE COMPRA','DEVOLUCION X SOBRESTOCK','DEVOLUCION X VENCIMIENTO','DEVOLUCION X DETERIORO','DONACION']
+        - Documento Origen (Lista Orden_Compra,Guia_Devolucion,Pecosa,Producto_Nota_Ingreso)
+    Lista Productos: (Crear)
+        -- Nombre
+        - Cod_Producto
+        - Cant_Producto
+        -- Precio
+        -- Fecha Vencimiento
+        - Importe (Cant * Precio)
+    Producto Nota Ingreso:
+        - N°Nota
+        - Cod_Producto
+        - Cant_Produto
+        - Importe
+DATA:
+    Datos Nota de Ingreso>
+        - N°Nota
+        - Tip_Doc_Origen
+        - Proveedor
+        - Nro_Doc_Origen
+        - Mes
+        - Año
+        - Dia
+        - Hora
+    Datos NI_Producto
+        - N°Nota
+        - Cod_Producto
+        - Cant_Producto
+        - Importe
+    Datos Proveedor
+        - RUC_Prove
+        - Nom_Prove
+        - Direc_Prove
+        - Representante_emp
+    Datos Producto
+        - Cod_Producto
+        - Nom_Producto
+        - Fecha_vencimiento
+        - Descripcion
+        - Precio_Unitario
+
+Falta en la BD:
+  - Proc: Listar_Notas
+    Modelfm01: getAllNotas()
+  - Proc: Get_Nota
+    Modelfm01: getNota()
+  - Proc: Get_List_Prove
+    Modelfm01: getListProve()
+  - Proc: Get_Prod
+    Modelfm01: getProd()
+  - Proc: Get_ProdPrecio
+    Modelfm01: getProdPrecio()
+  - Proc: Insert_Prod
+    Modelfm01: insertProd()
+  - Proc: Update_Prod
+    Modelfm01: updateProd()
+  - Proc: Delete_Prod
+    Modelfm01: deleteProd()
+  - Proc: Get_List_Prod
+    Modelfm01: getListProve()
+  - Proc: Listar_Nota_Productos
+    Modelfm01: getAllNotasProd()
+  
+Funciones:
+    - Formularios:
+        OK- Listado NI
+        OK- Nuevo NI
+        OK- Editar NI
+          OK- Listado PNI
+          OK- Nuevo PNI
+          OK- Editar PNI
+          OK- Eliminar PNI
+        OK- Eliminar NI
+    - Consultas:
+        - 10 Consultas (Emtrega 4)
