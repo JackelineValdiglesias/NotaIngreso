@@ -95,40 +95,26 @@ class Modelfm01 extends Model
         return $l2;
     }
 
+    /*public function ConsultaGuiaDevolucion()
+    {
+        return $this->db->query("call consul_guia_devolucion()")->getResultArray();
+    }*/
+
     public function getInf($num)//Obtener el informe correspondiente
     {
         $dt = [];
         $lq = 
         [
-            "SELECT * FROM nota_ingreso WHERE Tip_Doc_Origen LIKE 'Devol%';",
-            "SELECT ni.*, (pni.cant_producto * pr.precio_unitario) AS 'Monto Total' FROM nota_ingreso ni
-                INNER JOIN producto_nota_ingreso pni on pni.N°Nota=ni.N°Nota
-                JOIN Producto pr on pr.Cod_Producto=pni.Cod_Producto
-                WHERE ni.Dia= 15 AND ni.Mes=10 AND ni.Año=2021;",
-            "Select p.cod_producto, datediff(fecha_vencimiento,curdate()) as F ,
-                pg.cant_producto as 'Cantidad Guia', round(pg.cant_producto * p.precio_unitario,2) as 'Monto Perdido Guía',
-                po.cant_producto as 'Cantidad Orden', round(po.cant_producto * p.precio_unitario,2) as 'Monto Perdido Orden'
-                from Producto p
-                LEFT JOIN producto_guia_devolucion pg on pg.cod_producto=p.cod_producto
-                LEFT JOIN producto_orden_compra po on po.cod_producto=p.cod_producto;",
-            "SELECT o.N°Orden_Compra, o.RUC_Prove, p.nom_prove, p.direc_prove FROM orden_compra o JOIN proveedor  p on p.RUC_prove=o.RUC_prove;",
-            "SELECT Cod_Producto, Precio_unitario, ROUND((Precio_unitario*1.2),2) AS 'Precio Comercial' FROM Producto WHERE N°Orden_Compra IS NOT NULL;",
-            "SELECT p.* FROM sismed.orden_compra o JOIN Producto_orden_compra p on p.N°Orden_Compra=o.N°Orden_Compra WHERE N°Nota IS NOT NULL;",
-            "SELECT ni.*, p.Cod_Producto  FROM nota_ingreso ni JOIN producto_Nota_ingreso p on p.N°Nota=ni.N°Nota WHERE Tip_Doc_Origen LIKE 'Dona%';",
-            "SELECT ni.*, oc.N°Orden_Compra, pni.Cod_Producto, pr.descripcion FROM nota_ingreso ni
-                INNER JOIN orden_compra oc on oc.N°Nota=ni.N°Nota
-                INNER JOIN producto_nota_ingreso pni on pni.N°Nota=ni.N°Nota
-                INNER JOIN Producto pr on pr.Cod_Producto=pni.Cod_Producto
-                WHERE ni.Dia= 15 AND ni.Mes=10 AND ni.Año=2021;",
-            "SELECT gd.*, p.Nom_producto FROM guia_devolucion  gd
-                JOIN Establecimiento e on gd.Cod_Establecimiento=e.Codigo_EBL
-                JOIN Producto p on p.Codigo_EBL=e.Codigo_EBL 
-                JOIN producto_nota_ingreso pni on p.cod_Producto=pni.Cod_Producto 
-                JOIN nota_ingreso ni on pni.N°Nota=ni.N°Nota
-                WHERE ni.MES=10;",
-            "SELECT p.Cod_Producto, p.Descripcion, p.Precio_unitario FROM Producto p 
-                JOIN producto_nota_ingreso pni ON p.Cod_producto=pni.Cod_producto
-                JOIN nota_ingreso ni on pni.N°Nota=ni.N°Nota WHERE Mes=10;",
+            "call consul_guia_devolucion()",
+            "call consul_ingresos_dia()",
+            "call consul_produ_porvencer()",
+            "call consul_proveedores_compra()",
+            "call consul_precio_masporcentaje()",
+            "call consul_ppa()",
+            "call consul_pecosa()",
+            "call consul_ingreso_productodia()",
+            "call consul_guia_devolucion_mensual()",
+            "call consul_alm_valorizado()",
         ];
         $dt['dt'] = $this->db->query($lq[$num])->getResultArray();
 
