@@ -106,7 +106,7 @@
 											<div class="col-md-12 col-sm-12">
 												<div class="form-group">
 													<label>Nota de Ingreso</label>
-													<?php echo form_input(["name" => "N°Nota","id" => "idni", "type"=>"text","class" => "form-control border-input", "value" => (isset($dtreg['N°Nota'])?$dtreg['N°Nota']:'')]) ?>
+													<?php echo form_input(["name" => "N°Nota","id" => "idni", "type"=>"text","class" => "form-control border-input", "value" => (isset($dtreg['N°Nota'])?$dtreg['N°Nota']:$nro)]) ?>
 												</div>
 											</div>
 										</div>
@@ -139,7 +139,7 @@
 											</div>
 										</div>										
 										<div class="text-center">
-											<a href="<?=base_url($this->data["ctrl"]."/editar/".$dtreg["N°Nota"])?>" class="btn btn-danger btn-fill btn-wd">Cancelar</a>
+											<a href="<?=base_url($this->data["ctrl"]."/editar/".$nro."/1")?>" class="btn btn-danger btn-fill btn-wd">Cancelar</a>
 											<button type="submit" class="btn btn-success btn-fill btn-wd">Guardar</button>
 										</div>
 										<div class="clearfix"></div>

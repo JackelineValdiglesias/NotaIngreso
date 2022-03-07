@@ -239,5 +239,19 @@
 			id = dt.nro
 			window.location = cadenaurl+ctrl+'/editar/'+id+'/1'
 		}
+		async function eliminar(rw) {
+			dt = tlist.row(rw).data()
+			id = dt.nro
+			res = await $.ajax({
+				url: cadenaurl + ctrl + '/ajaxdelnota',
+				data: {nro: id},
+				type: 'GET',
+			});
+			p = res;
+			console.log(p);
+			if(p.r) alert("Nota Eliminada")
+			else alert("Error al eliminar")
+			tlist.ajax.reload()
+		}
     </script>
 </html>

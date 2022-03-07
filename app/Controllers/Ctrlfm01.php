@@ -74,6 +74,7 @@ class Ctrlfm01 extends BaseController
 		$d["dtreg"] = $this->model->getProd($id,$nro);
 		$d["lprod"] = $this->model->getListProd();
 		$d["id"] = $id;
+		$d["nro"] = $nro;
 		$d["edt"] = $edt;
 		return view('ctrlfm01/editarprod',$d);
 	}
